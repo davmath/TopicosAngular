@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Ciclo } from 'src/app/models/Ciclo';
+import { CicloService } from 'src/app/services/ciclo.service';
 
 @Component({
   selector: 'app-cadastrar',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastrarComponent implements OnInit {
 
-  constructor() { }
+  ciclo : Ciclo = new Ciclo();
+
+  constructor(private service: CicloService) { }
 
   ngOnInit(): void {
   }
 
+  cadastrar(): void{
+    
+    this.service.cadastrar(this.ciclo).subscribe((ciclo)=>{
+      console.log(ciclo)
+    });
+  }
 }
+

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Ciclo } from 'src/app/models/Ciclo';
+import { CicloService } from 'src/app/services/ciclo.service';
 
 @Component({
   selector: 'app-listar',
@@ -7,16 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarComponent implements OnInit {
 
-  contador : number = 0;
+  ciclos: Ciclo[] = [];
 
-  constructor() { }
+  constructor(private service: CicloService) {}
 
   ngOnInit(): void {
-    //Carregar todos os ciclos de pagamento que estão na API.
-    //console.log("Testando  evento de carregamento do componente!");
+   this.service.listar().subscribe((ciclos)=>{
+      this.ciclos = ciclos;
+    });
   }
 
   incrementarContador() : void{
-    this.contador++;
   }
 }
